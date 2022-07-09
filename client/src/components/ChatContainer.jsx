@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import ChatInput from '../pages/ChatInput';
 import Logout from './Logout';
+import Message from './Message';
 
 const Container = styled.div`
     padding-top: 1rem;
@@ -30,27 +32,32 @@ const Container = styled.div`
 `;
 
 export default function ChatContainer({currentChat}) {
-  return (
-    <>
-        {
-            currentChat && (
-                <Container>
-                    <div className="chat-header">
-                        <div className="user-details">
-                            <div className="avatar">
-                                <img src={`data:image/svg+xml;base64,${currentChat.avatarImage}`} alt="avatar" />
+
+    const handleSendMessage = async (msg) => {
+
+    };
+
+    return (
+        <>
+            {
+                currentChat && (
+                    <Container>
+                        <div className="chat-header">
+                            <div className="user-details">
+                                <div className="avatar">
+                                    <img src={`data:image/svg+xml;base64,${currentChat.avatarImage}`} alt="avatar" />
+                                </div>
+                                <div className="username">
+                                    <h3>{currentChat.username}</h3>
+                                </div>
                             </div>
-                            <div className="username">
-                                <h3>{currentChat.username}</h3>
-                            </div>
+                            <Logout />
                         </div>
-                        <Logout />
-                    </div>
-                    <div className="chat-messages"></div>
-                    <div className="chat-input"></div>
-                </Container>
-            )
-        }
-    </>
-  )
+                        <Message />
+                        <ChatInput handleSendMessage={handleSendMessage} />
+                    </Container>
+                )
+            }
+        </>
+    )
 }
